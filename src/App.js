@@ -69,7 +69,7 @@ class App extends Component {
             <div id="session-increment" className="fas fa-arrow-up" onClick={this.increaseSession}></div>
          </div>
 
-          <Timer />
+          <Timer sessValue={this.state.sessionVal} breakValue={this.state.breakVal}/>
         </main>
       </div>
     );
@@ -89,10 +89,49 @@ class Timer extends React.Component {
     super(props);
     this.state = {
       display: 'stop',
+      status: 'session',
+      time: this.props.sessValue * 60,
+      min: Math.ceil(this.props.sessValue * 60/60),
+      sec: this.props.sessValue * 60 % 60,
     }
   }
-  //Add the basic timer functionality
-  //Add the switch timer functionality
+
+  //Timer functionality
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      time: this.state.time - 1,
+    });
+    this.setState({
+      min: Math.floor(this.state.time / 60),
+      sec: this.state.time % 60,
+    })
+      //Switch timer functionality
+    if (this.state.time === 0 && this.state.status === 'session') {
+      this.setState({
+        time: this.props.breakValue * 60,
+
+        status: 'break',
+      })
+    }//end of if time === 0 and status === session
+    if (this.state.time === 0 && this.state.status === 'break') {
+      this.setState({
+        time: this.props.sessValue * 60,
+        status: 'session',
+      })
+    }//end of if time===0 and status === session
+  }
+     
   //Add the noise switch timer functionality
 
   //Add the play functionality
@@ -100,11 +139,12 @@ class Timer extends React.Component {
   //Add the stop functionality
   render() {
     return (
-      <React.Fragment>
-        <div id="timer">Timer</div>
-        <div className="index__timerControlWrapper">
+      <React.Fragment>     
+        {this.state.sec >= 10 && <div id="timer">{this.state.min}:{this.state.sec}</div>}
+        {this.state.sec < 10 && <div id="timer">{this.state.min}:0{this.state.sec}</div>}
+            <div className="index__timerControlWrapper">
           {this.state.display === 'play' && <span id="start_stop" className="fas fa-play"></span> }
-          {this.state.display === 'stop' && <span id="start_stop" className="fas fa-stop"></span> }
+          {this.state.display === 'stop' && <span id="start_stop" className="fas fa-pause"></span> }
           <span id="reset" className="fas fa-sync-alt"></span>
         </div>
        </React.Fragment>
