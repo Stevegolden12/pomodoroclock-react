@@ -17,16 +17,23 @@ class App extends Component {
     return (
       <div className="App">
         {/*                                 Add Container/Grid CSS layout                                       */}
-        <div>Pomodoro Clock</div>
-        <DecreaseClick />
-        <LabelComp idName="break-label" labelName="Break Label" />
-        <IncreaseClick />
-        <DecreaseClick />
-        <LabelComp idName="session-label" labelName="Session Label" />
-        <IncreaseClick />
-        <label idName="break-length">{this.state.breakVal}</label>
-        <label idName="session-length">{this.state.sessionVal}</label>
-        <Timer />
+        <main class="index__container">
+          <div class="index__Titlename">Pomodoro Clock</div>
+          <LabelComp idName="break-label" labelName="Break Length" />
+          <div class="index_breakWrapper">
+            <DecreaseClick idName="break-decrement"/>
+            <label id="break-length">{this.state.breakVal}</label>
+            <IncreaseClick idName="break-increment" />
+          </div>
+          <LabelComp idName="session-label" labelName="Session Length" />
+          <div class="index_sessionWrapper">
+            <DecreaseClick idName="session-decrement"/>
+            <label id="session-length">{this.state.sessionVal}</label>
+            <IncreaseClick idName="session-increment" />
+         </div>
+
+          <Timer />
+        </main>
       </div>
     );
   }
@@ -52,7 +59,7 @@ class IncreaseClick extends React.Component {
   render() {
     return (
                       //Add the code that whatever session/break props is passed you use that method to adjust the inputs
-      <div id={this.props.idName}></div>  
+      <div id={this.props.idName} class="fas fa-arrow-up"></div>  
     )
   }
 }
@@ -67,7 +74,7 @@ class DecreaseClick extends React.Component {
   render() {
     return (
     //Add the code that whatever session/break props is passed you use that method to adjust the inputs
-      <div id={this.props.idName}></div>
+      <div id={this.props.idName} class="fas fa-arrow-down"></div>
     )
   }
 }
@@ -75,7 +82,9 @@ class DecreaseClick extends React.Component {
 class Timer extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      display: 'stop',
+    }
   }
   //Add the basic timer functionality
   //Add the switch timer functionality
@@ -87,10 +96,12 @@ class Timer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div>Timer</div>
-        <span>Play</span>
-        <span>Pause</span>
-        <span>Stop</span>
+        <div id="timer">Timer</div>
+        <div class="index__timerControlWrapper">
+          {this.state.display === 'play' && <span id="start_stop" class="fas fa-play"></span> }
+          {this.state.display === 'stop' && <span id="start_stop" class="fas fa-stop"></span> }
+          <span id="reset" class="fas fa-sync-alt"></span>
+        </div>
        </React.Fragment>
     );
   }

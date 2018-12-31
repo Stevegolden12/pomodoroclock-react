@@ -1,0 +1,104 @@
+.index__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "indexTitle indexTitle"
+    "break-label session-label"
+    "break-wrapper session-wrapper"
+    "timer timer"
+    "timer timer"
+    "timerControlWrapper timerControlWrapper"
+}
+
+.index__Titlename {
+  grid-area: indexTitle;
+  text-align: center;
+  font-size: 7vmax;
+}
+
+#break-label {
+  grid-area: break-label;
+  text-align: center;
+  font-size: 5vmax;
+}
+
+.index_breakWrapper {
+  grid-area:break-wrapper;
+  display: flex;
+  justify-content: center;
+}
+
+#break-decrement {
+  grid-area: break-decrement;
+  min-height: 100%;
+  font-size: 70px;
+}
+
+#break-length {
+  border: 1px solid black;
+  font-size: 40px;
+  grid-area: break-length;
+}
+
+#break-increment {
+  grid-area: break-increment;
+  font-size: 70px;
+}
+
+#session-label {
+  grid-area: session-label;
+  text-align: center;
+  font-size: 5vmax;
+}
+
+.index_sessionWrapper {
+  grid-area: session-wrapper;
+  display: flex;
+  justify-content: center;
+}
+
+#session-decrement {
+  grid-area: session-increment;
+  font-size: 70px;
+}
+
+#session-length {
+  border: 1px solid black;
+  font-size: 40px;
+  grid-area: session-length;
+}
+
+#session-increment {
+  grid-area: session-increment;
+  font-size: 70px;
+}
+
+#timer {
+  grid-area: timer;
+  text-align: center;
+  width: 60%;
+  font-size: 5vmax;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.index__timerControlWrapper {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  justify-content: space-around;
+  grid-area: timerControlWrapper;
+}
+
+#start_stop {
+  grid-area: start-stop;
+  text-align: center;
+  font-size: 40px;
+}
+
+#reset {
+  grid-area: reset;
+  text-align: center;
+  font-size: 40px;
+}
