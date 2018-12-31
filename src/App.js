@@ -11,25 +11,44 @@ class App extends Component {
     this.state = {
       breakVal: 5,
       sessionVal: 25,
-    }
+     }
+    this.increaseBreak = this.increaseBreak.bind(this);
+    this.increaseSession = this.increaseSession.bind(this);
+  }
+
+  increaseBreak() {
+    console.log('Testing')
+      if (this.state.breakVal < 60) {
+        this.setState({
+          breakVal: this.state.breakVal + 1
+        })
+       }//end of breakVal validation between 0 and 60
+  }//end of this.increaseClick
+
+  increaseSession() {
+      if (this.state.sessionVal < 60) {
+        this.setState({
+          sessionVal: this.state.sessionVal + 1
+        })
+      }//end of SessionVal validation between 0 and 60
   }
   render() {
     return (
       <div className="App">
         {/*                                 Add Container/Grid CSS layout                                       */}
-        <main class="index__container">
-          <div class="index__Titlename">Pomodoro Clock</div>
+        <main className="index__container">
+          <div className="index__Titlename">Pomodoro Clock</div>
           <LabelComp idName="break-label" labelName="Break Length" />
-          <div class="index_breakWrapper">
-            <DecreaseClick idName="break-decrement"/>
+          <div className="index_breakWrapper">
+            <DecreaseClick idName="break-decrement" />
             <label id="break-length">{this.state.breakVal}</label>
-            <IncreaseClick idName="break-increment" />
+            <div id="break-increment" className="fas fa-arrow-up" onClick={this.increaseBreak}></div>
           </div>
           <LabelComp idName="session-label" labelName="Session Length" />
-          <div class="index_sessionWrapper">
+          <div className="index_sessionWrapper">
             <DecreaseClick idName="session-decrement"/>
             <label id="session-length">{this.state.sessionVal}</label>
-            <IncreaseClick idName="session-increment" />
+            <div id="session-increment" className="fas fa-arrow-up" onClick={this.increaseSession}></div>
          </div>
 
           <Timer />
@@ -45,24 +64,7 @@ const LabelComp = (props) => {
     <div id={props.idName}>{props.labelName}</div>     
   )
 }
-/*                               break is 5 and session is 25 must add a props                                                  */
 
-class IncreaseClick extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-  }
-                             //Add the methods breakIncrease and sessionIncrease
-
-
-  render() {
-    return (
-                      //Add the code that whatever session/break props is passed you use that method to adjust the inputs
-      <div id={this.props.idName} class="fas fa-arrow-up"></div>  
-    )
-  }
-}
 
 class DecreaseClick extends React.Component {
     //Add the methods breakDecrease and sessionDecrease
@@ -74,7 +76,7 @@ class DecreaseClick extends React.Component {
   render() {
     return (
     //Add the code that whatever session/break props is passed you use that method to adjust the inputs
-      <div id={this.props.idName} class="fas fa-arrow-down"></div>
+      <div id={this.props.idName} className="fas fa-arrow-down"></div>
     )
   }
 }
@@ -97,10 +99,10 @@ class Timer extends React.Component {
     return (
       <React.Fragment>
         <div id="timer">Timer</div>
-        <div class="index__timerControlWrapper">
-          {this.state.display === 'play' && <span id="start_stop" class="fas fa-play"></span> }
-          {this.state.display === 'stop' && <span id="start_stop" class="fas fa-stop"></span> }
-          <span id="reset" class="fas fa-sync-alt"></span>
+        <div className="index__timerControlWrapper">
+          {this.state.display === 'play' && <span id="start_stop" className="fas fa-play"></span> }
+          {this.state.display === 'stop' && <span id="start_stop" className="fas fa-stop"></span> }
+          <span id="reset" className="fas fa-sync-alt"></span>
         </div>
        </React.Fragment>
     );
