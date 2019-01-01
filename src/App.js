@@ -53,7 +53,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*                                 Add Container/Grid CSS layout                                       */}
         <main className="index__container">
           <div className="index__Titlename">Pomodoro Clock</div>
           <LabelComp idName="break-label" labelName="Break Length" />
@@ -88,20 +87,44 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: 'stop',
+      display: 'play',
       status: 'session',
       time: this.props.sessValue * 60,
       min: Math.ceil(this.props.sessValue * 60/60),
       sec: this.props.sessValue * 60 % 60,
     }
+    this.timerStart = this.timerStart.bind(this);
+    this.timerPause = this.timerPause.bind(this);
+    this.timerReset = this.timerReset.bind(this);
   }
 
-  //Timer functionality
-  componentDidMount() {
+ 
+  //Timer play functionality
+  timerStart() {
     this.timerID = setInterval(
       () => this.tick(),
       1000
     );
+    this.setState({
+      display: 'pause'
+    })
+  }
+  //Timer pause functionality
+  timerPause() {
+    clearInterval(this.timerID);
+    this.setState({
+      display: 'play'
+    })
+  }
+
+  //Timer reset functionality
+  timerReset() {
+    this.setState({
+      time: this.props.sessValue * 60,
+      min: Math.ceil(this.props.sessValue * 60 / 60),
+      sec: this.props.sessValue * 60 % 60,
+    })
+    console.log(this.state.time)
   }
 
   componentWillUnmount() {
@@ -133,19 +156,16 @@ class Timer extends React.Component {
   }
      
   //Add the noise switch timer functionality
-
-  //Add the play functionality
-  //Add the pause functionality
-  //Add the stop functionality
-  render() {
+  
+   render() {
     return (
       <React.Fragment>     
         {this.state.sec >= 10 && <div id="timer">{this.state.min}:{this.state.sec}</div>}
         {this.state.sec < 10 && <div id="timer">{this.state.min}:0{this.state.sec}</div>}
             <div className="index__timerControlWrapper">
-          {this.state.display === 'play' && <span id="start_stop" className="fas fa-play"></span> }
-          {this.state.display === 'stop' && <span id="start_stop" className="fas fa-pause"></span> }
-          <span id="reset" className="fas fa-sync-alt"></span>
+          {this.state.display === 'play' && <span id="start_stop" className="fas fa-play" onClick={this.timerStart}></span> }
+          {this.state.display === 'pause' && <span id="start_stop" className="fas fa-pause" onClick={this.timerPause}></span> }
+          <span id="reset" className="fas fa-sync-alt" onClick={this.timerReset}></span>
         </div>
        </React.Fragment>
     );
