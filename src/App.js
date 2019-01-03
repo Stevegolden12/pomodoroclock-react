@@ -24,7 +24,7 @@ class App extends Component {
       if (this.state.breakVal < 60) {
         this.setState({
           breakVal: this.state.breakVal + 1,
-          isClicked: true,
+          isClicked: !this.state.isClicked,
         })
        }//end of breakVal validation cannot go past 60
   }//end of this.increaseBreak
@@ -33,7 +33,7 @@ class App extends Component {
     if (this.state.breakVal > 0) {
       this.setState({
         breakVal: this.state.breakVal - 1,
-        isClicked: true,
+        isClicked: !this.state.isClicked,
       })
     }//end of breakVal validation cannot go below 0
   }//end of this.decreaseBreak
@@ -42,16 +42,16 @@ class App extends Component {
       if (this.state.sessionVal < 60) {
         this.setState({
           sessionVal: this.state.sessionVal + 1,
-          isClicked: true,
+          isClicked: !this.state.isClicked,
         })
-      }//end of SessionVal validation cannot go past 60
+       }//end of SessionVal validation cannot go past 60
   }//end of this.increaseSession
 
   decreaseSession() {
     if (this.state.sessionVal > 0) {
       this.setState({
         sessionVal: this.state.sessionVal - 1,
-        isClicked: true,
+        isClicked: !this.state.isClicked,
       })
     }//end of SessionVal validation cannot go below 0
   }//end of this.increaseSession
@@ -74,7 +74,9 @@ class App extends Component {
             <label id="session-length">{this.state.sessionVal}</label>
             <div id="session-increment" className="fas fa-arrow-up" onClick={this.increaseSession}></div>
           </div>
-          <Timer sessValue={this.state.sessionVal} breakValue={this.state.breakVal} />
+          {/* isClicked state is used whenever you increase or decreasing session or break time this forces Timer component to render and always set the time in the component*/}
+          {this.state.isClicked === false && <Timer sessValue={this.state.sessionVal} breakValue={this.state.breakVal} />}
+          {this.state.isClicked === true && <Timer sessValue={this.state.sessionVal} breakValue={this.state.breakVal} />}
         </main>
     </div>
     );
@@ -116,8 +118,7 @@ class Timer extends React.Component {
       display: 'pause',
       toggle: false,
     })
-    console.log('timerStart: ' + this.state.toggle)
-  }
+   }
   //Timer pause functionality
   timerPause() {
     clearInterval(this.timerID);
@@ -163,20 +164,18 @@ class Timer extends React.Component {
       })
     }//end of if time===0 and status === session
   }
-
-  //Add the noise switch timer functionality
-  
+    
   render() {
     return (
-      <React.Fragment>   
-        {this.state.sec >= 10 && <div id="timer">{this.state.min}:{this.state.sec}</div>}
-        {this.state.sec < 10 && <div id="timer">{this.state.min}:0{this.state.sec}</div>}
+      <React.Fragment>        
+        {this.state.sec >= 10 && <div id="timer"><h5 id="timer-label">{this.state.status} time</h5><h5 id="time-display">{this.state.min}:{this.state.sec}</h5></div>}
+        {this.state.sec < 10 && <div id="timer"><h5 id="timer-label">{this.state.status} time</h5><h5 id="time-display">{this.state.min}:0{this.state.sec}</h5></div>}
             <div className="index__timerControlWrapper">
           {this.state.display === 'play' && <span id="start_stop" className="fas fa-play" onClick={this.timerStart}></span> }
           {this.state.display === 'pause' && <span id="start_stop" className="fas fa-pause" onClick={this.timerPause}></span>}
           {/* Add the noise switch timer functionality */}
-          {this.state.toggle === 'session' && <audio src={beep} autoPlay />}
-          {this.state.toggle === 'break' && <audio src={beep} autoPlay />}
+          {this.state.toggle === 'session' && <audio id="beep" src={beep} autoPlay />}
+          {this.state.toggle === 'break' && <audio id="beep" src={beep} autoPlay />}
              <span id="reset" className="fas fa-sync-alt" onClick={this.timerReset}></span>
         </div>
        </React.Fragment>
