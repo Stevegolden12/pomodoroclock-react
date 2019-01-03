@@ -1,7 +1,7 @@
 .index__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr .6fr 1fr 1fr 1fr;
   grid-template-areas:
     "indexTitle indexTitle"
     "break-label session-label"
@@ -32,12 +32,11 @@
 #break-decrement {
   grid-area: break-decrement;
   min-height: 100%;
-  font-size: 70px;
+  font-size: 9vmax;
 }
 
 #break-length {
-  border: 1px solid black;
-  font-size: 40px;
+  font-size: 7vmax;
   min-width: 50px;
   text-align: center;
   grid-area: break-length;
@@ -45,7 +44,7 @@
 
 #break-increment {
   grid-area: break-increment;
-  font-size: 70px;
+  font-size: 9vmax;
 }
 
 #session-label {
@@ -62,12 +61,11 @@
 
 #session-decrement {
   grid-area: session-increment;
-  font-size: 70px;
+  font-size: 9vmax;
 }
 
 #session-length {
-  border: 1px solid black;
-  font-size: 40px;
+  font-size: 7vmax;
   min-width: 50px;
   text-align: center;
   grid-area: session-length;
@@ -75,7 +73,16 @@
 
 #session-increment {
   grid-area: session-increment;
-  font-size: 70px;
+  font-size: 9vmax;
+}
+
+#timer-label {
+  margin: 0;
+}
+
+#time-display {
+  margin: 0;
+  font-size: 8vmax;
 }
 
 #timer {
@@ -91,6 +98,7 @@
   display: flex;
   width: 60%;
   margin: 0 auto;
+  padding-top: 20px;
   justify-content: space-around;
   grid-area: timerControlWrapper;
 }
@@ -98,11 +106,11 @@
 #start_stop {
   grid-area: start-stop;
   text-align: center;
-  font-size: 40px;
+  font-size: 6vmax;
 }
 
 #reset {
   grid-area: reset;
   text-align: center;
-  font-size: 40px;
+  font-size: 6vmax;
 }
