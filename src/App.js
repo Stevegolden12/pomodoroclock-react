@@ -48,7 +48,7 @@ class App extends Component {
   }//end of this.increaseSession
 
   decreaseSession() {
-    if (this.state.sessionVal > 0) {
+    if (this.state.sessionVal > 1) {
       this.setState({
         sessionVal: this.state.sessionVal - 1,
         isClicked: !this.state.isClicked,
@@ -167,7 +167,8 @@ class Timer extends React.Component {
     
   render() {
     return (
-      <React.Fragment>        
+      <React.Fragment>    
+        {/* The following two statements will add an added 0 when seconds is below 10*/}
         {this.state.sec >= 10 && <div id="timer"><h5 id="timer-label">{this.state.status} time</h5><h5 id="time-display">{this.state.min}:{this.state.sec}</h5></div>}
         {this.state.sec < 10 && <div id="timer"><h5 id="timer-label">{this.state.status} time</h5><h5 id="time-display">{this.state.min}:0{this.state.sec}</h5></div>}
             <div className="index__timerControlWrapper">
