@@ -3,8 +3,10 @@
     "",
     "\\public",
     "\\src",
+    "\\src\\components",
+    "\\src\\Prototype",
     "\\src\\sounds"
   ],
-  "SelectedNode": "\\public\\index.html",
+  "SelectedNode": "\\src\\components\\Timer.js",
   "PreviewInSolutionExplorer": false
 }
