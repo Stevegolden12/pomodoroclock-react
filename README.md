@@ -1,3 +1,11 @@
+# Pomodoroclock-react
+
+Pomodoro Clock app with React using HTML, CSS, and JavaScript.  Part of freeCodeCamp Front End Libraries certificate projects.
+
+## Installation
+
+Download files [here](https://github.com/Stevegolden12/pomodoroclock-react)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +74,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Acknowledgement
+
+Thank you to [freeCodeCamp](https://www.freeCodeCamp.org) for helping me learn React to make this project!
